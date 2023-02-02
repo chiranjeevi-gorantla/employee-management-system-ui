@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Employee = ({ employee, deleteEmployee }) => {
+  const navigate = useNavigate();
+  const editEmployee = (e, id) => {
+    e.preventDefault();
+    navigate(`/editEmployee/${id}`);
+  };
+
   return (
     <tr key={employee.employeeId}>
       <td className="text-left px-6 py-4 whitespace-nowrap">
@@ -14,12 +21,15 @@ const Employee = ({ employee, deleteEmployee }) => {
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap font-medium text-right text-sm">
         <div className="pr-20">
-          <a href="/#" className="text-white px-4">
-            <button className="bg-slate-600 hover:bg-slate-800 rounded px-4 py-2">
+          <a className="text-white px-4">
+            <button
+              onClick={(e, id) => editEmployee(e, employee.id)}
+              className="bg-slate-600 hover:bg-slate-800 rounded px-4 py-2"
+            >
               Edit
             </button>
           </a>
-          <a className="text-white px-4 ">
+          <a className="text-white px-4">
             <button
               onClick={(e, id) => deleteEmployee(e, employee.id)}
               className="bg-slate-600 hover:bg-slate-800 rounded px-4 py-2"
